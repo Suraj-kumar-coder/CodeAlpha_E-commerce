@@ -1,0 +1,64 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row ">
+  <div class="col-sm-6 offset-sm-3 ">
+
+
+    <div class="container d-flex ">
+
+      <div class="d-flex flex-column">
+        <strong>Admin UserName :</strong>
+        <strong>Admin Password :</strong>
+        <hr>
+        <strong>UserName :</strong> 
+        <strong>User Password :</strong> 
+         
+      </div>
+
+      <div class="d-flex flex-column">
+         <strong  class=''>admin</strong>
+         <strong  class=''>admin</strong>
+        <hr>
+         <strong class=''> shubham</strong>
+         <strong  class=''>hellopassword</strong>
+      </div>
+      
+    </div>
+    <h3 class='text-center'>Login</h3>
+    <hr>
+
+   <form action="" method="post" novalidate class="shadow p-5">
+    {% if messages %}
+    {% for message in messages %}
+    <p {% if message.tags %} class='alert alert-{{message.tags}} mb-5' {% endif %}>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% csrf_token %}
+  {% for fm in form %}
+  <div class="form-group mb-3">
+   {{fm.label_tag}} {{fm}} <small class='text-danger'>{{fm.errors|striptags}}</small>
+  </div>
+  {% endfor %}
+  <input type="submit" value="Submit" class='btn btn-primary'>
+  <br>
+  <div class="text-center text-primary fw-bold">
+   <small><a href="{% url "password_reset" %}" class='text-danger '>Forget Password ? </a></small>
+  </div>
+
+  <br>
+  <div class="text-center text-primary fw-bold">
+   <small>New User ? <a href="{% url "customerregistration" %}" class='text-danger '>Registerd Here</a></small>
+  </div>
+  {% if form.non_field_errors %}
+  {% for error in form.non_field_errors %}
+  <p class="alert alert-danger my-3">{{error}}</p>
+  {% endfor %}
+  {% endif %}
+   </form>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
